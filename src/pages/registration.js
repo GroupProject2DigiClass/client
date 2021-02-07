@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Menu, MenuItem } from "@material-ui/core";
 import AdminForm from "./../components/registrationForm/admin";
+import StudentForm from "./../components/registrationForm/student";
 
 export default function Register() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -60,7 +61,7 @@ export default function Register() {
           ) : selectedIndex === 2 ? (
             "Teacher"
           ) : (
-            "Student"
+            <StudentForm />
           )}
         </div>
       </center>
