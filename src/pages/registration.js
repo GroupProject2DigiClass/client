@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Menu, MenuItem } from "@material-ui/core";
 import AdminForm from "./../components/registrationForm/admin";
 import StudentForm from "./../components/registrationForm/student";
+import TeacherForm from "../components/registrationForm/teacher";
 
 export default function Register() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -59,7 +60,7 @@ export default function Register() {
           {selectedIndex === 3 ? (
             <AdminForm />
           ) : selectedIndex === 2 ? (
-            "Teacher"
+            <TeacherForm />
           ) : (
             <StudentForm />
           )}
