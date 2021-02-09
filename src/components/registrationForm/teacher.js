@@ -1,10 +1,8 @@
 import React from "react";
 import { Button, TextField } from "@material-ui/core";
-import { STUDENT, MALE, FEMALE } from "./../../constants";
+import { TEACHER, MALE, FEMALE } from "./../../constants";
 import { makeStyles } from "@material-ui/core/styles";
-import { useDispatch } from "react-redux";
 import FileBase from "react-file-base64";
-import { addStudent } from "./../../actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,19 +14,20 @@ const useStyles = makeStyles((theme) => ({
   textField: {},
 }));
 
-export default function StudentForm() {
+export default function TeacherForm() {
   const [userData, setUserData] = React.useState({
     name: "",
     instituteID: "",
-    rank: STUDENT,
-    rollNo: "",
+    rank: TEACHER,
+    teacherID: "",
     email: "",
-    class: 1,
-    section: "A",
+    classes: [],
+    sections: [],
     gender: MALE,
     profileLink: "",
     images: "",
-    dob: "01-01-2001",
+    driveLink: "",
+    DOB: "01-01-2001",
   });
 
   const toggleGender = () => {
@@ -40,12 +39,7 @@ export default function StudentForm() {
 
   const regExp = RegExp(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/);
 
-  const dispatch = useDispatch();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(addStudent(userData));
-  };
+  const handleSubmit = () => {};
 
   return (
     <div style={{ width: "70%", paddingBottom: "100px" }}>
@@ -68,12 +62,12 @@ export default function StudentForm() {
           <div style={{ paddingTop: "60px" }}>
             <TextField
               variant="standard"
-              name="rollNo"
+              name="teacherID"
               fullWidth
-              label="Roll no."
+              label="Teacher ID."
               value={userData.teacherID}
               onChange={(e) => {
-                setUserData({ ...userData, rollNo: e.target.value });
+                setUserData({ ...userData, teacherID: e.target.value });
               }}
               // helperText="At least two characters."
               error={userData.name.trim().length > 2 ? false : true}
@@ -131,13 +125,15 @@ export default function StudentForm() {
                 variant="standard"
                 name="class"
                 fullWidth
-                label="Class/Semester/Year"
+                label="Classes/Semesters/Years"
                 value={userData.class}
                 onChange={(e) => {
-                  setUserData({ ...userData, class: e.target.value });
+                  setUserData({
+                    ...userData,
+                    classes: e.target.value.split(","),
+                  });
                 }}
-                error={userData.class > 0 ? false : true}
-                type="number"
+                error={userData.classes.length > 0 ? false : true}
                 style={{ marginTop: "8px" }}
                 className={classes.textField}
               />
@@ -152,12 +148,15 @@ export default function StudentForm() {
                 variant="standard"
                 name="section"
                 fullWidth
-                label="Section/Branch"
-                value={userData.section}
+                label="Sections/Branches"
+                value={userData.sections}
                 onChange={(e) => {
-                  setUserData({ ...userData, section: e.target.value });
+                  setUserData({
+                    ...userData,
+                    sections: e.target.value.split(","),
+                  });
                 }}
-                error={userData.section.trim().length > 0 ? false : true}
+                error={userData.sections.length > 0 ? false : true}
                 style={{ marginTop: "8px" }}
                 className={classes.textField}
               />

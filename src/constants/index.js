@@ -20,3 +20,16 @@ export const DIRECTOR = "DIRECTOR";
 //Student Position:
 export const STUDENT = "STUDENT";
 export const CR = "CR";
+
+//Teacher Positions:
+export const TEACHER = "TEACHER";
+export const HOD = "HOD";
+
+//Gender:
+export const MALE = "MALE";
+export const FEMALE = "FEMALE";
+
+//Actions:
+export const ADD_STUDENT = "ADD_STUDENT";
+export const ADD_TEACHER = "ADD_TEACHER";
+export const ADD_ADMIN = "ADD_ADMIN";

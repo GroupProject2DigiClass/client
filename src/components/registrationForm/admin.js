@@ -201,13 +201,20 @@ export default function AdminForm() {
         <div
           style={{
             paddingTop: "10px",
-            color: "white",
             justifyContent: "left",
             display: "flex",
             paddingTop: "60px",
           }}
         >
-          Add Profile Picture
+          <div
+            style={{
+              fontWeight: "600",
+              verticalAlign: "middle",
+              paddingRight: "10px",
+            }}
+          >
+            Add Profile Picture
+          </div>
           <FileBase
             type="file"
             multiple={false}
