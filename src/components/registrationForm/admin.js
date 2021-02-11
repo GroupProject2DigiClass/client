@@ -12,6 +12,7 @@ import {
   SECTION,
   DIRECTOR,
   PRINCIPLE,
+  ADMIN,
 } from "./../../constants";
 import { makeStyles } from "@material-ui/core/styles";
 import FileBase from "react-file-base64";
@@ -39,6 +40,7 @@ export default function AdminForm() {
     branchQuantity: 1,
     designation: PRINCIPLE,
     profileLink: "",
+    rank: ADMIN,
   });
 
   const classes = useStyles();
@@ -349,6 +351,16 @@ export default function AdminForm() {
               />
             </div>
           </div>
+        </div>
+        <div style={{ paddingTop: "20px" }}>
+          <Button
+            size="large"
+            type="submit"
+            className={classes.button}
+            style={{ border: "3px solid blueviolet", color: "blueviolet" }}
+          >
+            Submit
+          </Button>
         </div>
       </form>
     </div>

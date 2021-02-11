@@ -43,6 +43,8 @@ export default function StudentForm() {
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
+    console.log("Student Submit");
+    console.log(userData);
     e.preventDefault();
     dispatch(addStudent(userData));
   };
@@ -254,6 +256,16 @@ export default function StudentForm() {
                 setUserData({ ...userData, images: base64 })
               }
             />
+          </div>
+          <div style={{ paddingTop: "20px" }}>
+            <Button
+              size="large"
+              type="submit"
+              className={classes.button}
+              style={{ border: "3px solid blueviolet", color: "blueviolet" }}
+            >
+              Submit
+            </Button>
           </div>
         </div>
       </form>

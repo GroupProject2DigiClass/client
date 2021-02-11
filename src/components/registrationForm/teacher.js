@@ -3,6 +3,8 @@ import { Button, TextField } from "@material-ui/core";
 import { TEACHER, MALE, FEMALE } from "./../../constants";
 import { makeStyles } from "@material-ui/core/styles";
 import FileBase from "react-file-base64";
+import { useDispatch } from "react-redux";
+import { addTeacher } from "./../../actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,9 +39,16 @@ export default function TeacherForm() {
 
   const classes = useStyles();
 
+  const dispatch = useDispatch();
+
   const regExp = RegExp(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/);
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    console.log("Teacher Submit");
+    console.log(userData);
+    e.preventDefault();
+    dispatch(addTeacher(userData));
+  };
 
   return (
     <div style={{ width: "70%", paddingBottom: "100px" }}>
@@ -253,6 +262,16 @@ export default function TeacherForm() {
                 setUserData({ ...userData, images: base64 })
               }
             />
+          </div>
+          <div style={{ paddingTop: "20px" }}>
+            <Button
+              size="large"
+              type="submit"
+              className={classes.button}
+              style={{ border: "3px solid blueviolet", color: "blueviolet" }}
+            >
+              Submit
+            </Button>
           </div>
         </div>
       </form>
