@@ -37,3 +37,5 @@ export const FEMALE = "FEMALE";
 export const ADD_STUDENT = "ADD_STUDENT";
 export const ADD_TEACHER = "ADD_TEACHER";
 export const ADD_ADMIN = "ADD_ADMIN";
+
+export const ADMIN = "ADMIN";
