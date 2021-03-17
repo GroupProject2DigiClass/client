@@ -1,3 +1,7 @@
+export const AUTH = 'AUTH';
+export const LOGOUT = "LOGOUT";
+
+
 //Institute Types:
 export const COLLEGE = "COLLEGE";
 export const PRIMARY_SCHOOL = "PRIMARY_SCHOOL";
