@@ -1,0 +1,7 @@
+.unit{
+    opacity: 0.5
+}
+.unit:hover{  
+    opacity: 1;
+    transition-duration: 0.20s;
+}
