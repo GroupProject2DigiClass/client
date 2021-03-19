@@ -1,4 +1,19 @@
-.skillCard:hover{
-    transform: scale(1.25);
-    transition-duration: 0.25s;
+.skillCard:hover {
+  transform: scale(1.25);
+  transition-duration: 0.25s;
+}
+
+.classCard:hover {
+  border: 2px solid blue;
+}
+
+.classCard:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  border: 2px solid red;
+  border-radius: 25px;
+}
+
+.classCard:focus {
+  border: 3px solid #555;
 }
