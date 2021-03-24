@@ -1,6 +1,5 @@
-export const AUTH = 'AUTH';
+export const AUTH = "AUTH";
 export const LOGOUT = "LOGOUT";
-
 
 //Institute Types:
 export const COLLEGE = "COLLEGE";
@@ -37,5 +36,6 @@ export const FEMALE = "FEMALE";
 export const ADD_STUDENT = "ADD_STUDENT";
 export const ADD_TEACHER = "ADD_TEACHER";
 export const ADD_ADMIN = "ADD_ADMIN";
+export const ADD_CLASS = "ADD_CLASS";
 
 export const ADMIN = "ADMIN";

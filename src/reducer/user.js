@@ -1,10 +1,11 @@
 import { ADD_STUDENT } from "./../constants";
 
-export default (user = [], action) => {
+const user = (state = [], action) => {
   switch (action.type) {
     case ADD_STUDENT:
-      return [...user, action.payload];
+      return [...state, action.payload];
     default:
-      return user;
+      return state;
   }
 };
+export default user;
