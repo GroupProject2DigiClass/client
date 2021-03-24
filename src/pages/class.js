@@ -27,6 +27,7 @@ export default function Class() {
   var lectureTotal = 12;
   var practiceCompleted = 8;
   var practiceTotal = 10;
+  var rank;
   return (
     <div style={{ marginTop: "15px", marginLeft: "20px", marginRight: "20px" }}>
       <center>

@@ -1,10 +1,4 @@
-import React, { useState } from "react";
-import Login from "../components/Login";
-import Logout from "../components/Logout";
+import React from "react";
 export default function home() {
-  return (<div>
-<Login />
-<Logout />
-
-  </div>);
+  return <div>Welcome to Kamaal!!!</div>;
 }
