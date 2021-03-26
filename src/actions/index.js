@@ -20,14 +20,24 @@ export const addTeacher = (userData) => async (dispatch) => {
   }
 };
 
-export const addClass = async (classData) => {
-  try {
-    console.log(classData);
-    const data = await api.createClass(classData);
-    if (data) {
-      console.log(data);
+export const addClass = async (classData, task) => {
+  if (task === "ADD") {
+    try {
+      const data = await api.createClass(classData);
+      if (data) {
+        console.log(data);
+      }
+    } catch (error) {
+      console.log(error.message);
     }
-  } catch (error) {
-    console.log(error.message);
+  } else {
+    try {
+      const data = await api.editClass(classData);
+      if (data) {
+        console.log(data);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 };

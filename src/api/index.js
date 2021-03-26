@@ -24,3 +24,15 @@ export const createClass = async (data) => {
     })
     .then(() => {});
 };
+
+export const editClass = async (data) => {
+  await axios
+    .post("http://localhost:5005/makeclass/edit", data)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .then(() => {});
+};

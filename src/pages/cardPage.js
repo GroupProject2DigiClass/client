@@ -19,18 +19,18 @@ export default function CardPage() {
           backgroundPosition: "center center",
           backgroundRepeat: "no-repeat",
           backgroundColor: "black",
-          height: "100vh",
+          height: "100%",
           show: "flex",
         }}
       >
         <center>
-          <div style={{ paddingTop: "20vh" }}>
+          <div style={{ paddingTop: "10vh", paddingBottom: "10vh" }}>
             <div
               style={{
-                backgroundColor: "rgb(225,225,225,0.7)",
+                backgroundColor: "rgb(225,225,225,0.4)",
                 justifyContent: "center",
                 borderRadius: "10px",
-                width: "60vh",
+                width: "70vh",
               }}
             >
               <ClassRoomCard subjectTeacher={subjectTeacher} task="ADD" />
