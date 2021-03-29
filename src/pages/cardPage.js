@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 import ClassRoomCard from "../components/classPageCards/ClassRoom";
+import ClassLectureCard from "../components/classPageCards/ClassLecture";
 
 function getRandom() {
   return Math.floor((Math.random() * 50 + 1) / 5);
@@ -11,7 +12,7 @@ export default function CardPage() {
   var backgroundLocation =
     "/images/background" + getRandom().toString() + ".jfif";
   return (
-    <div>
+    <div style={{ height: "100vh" }}>
       <div
         style={{
           backgroundImage: `url(${backgroundLocation})`,
@@ -33,7 +34,8 @@ export default function CardPage() {
                 width: "70vh",
               }}
             >
-              <ClassRoomCard subjectTeacher={subjectTeacher} task="ADD" />
+              {/* <ClassRoomCard subjectTeacher={subjectTeacher} task="ADD" /> */}
+              <ClassLectureCard task="ADD" unitN={1} unit="React" />
             </div>
           </div>
         </center>
