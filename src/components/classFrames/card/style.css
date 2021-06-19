@@ -1,7 +1,8 @@
-.unit{
-    opacity: 0.5
+.unit {
+  opacity: 0.5;
 }
-.unit:hover{  
-    opacity: 1;
-    transition-duration: 0.20s;
+.unit:hover {
+  opacity: 1;
+  transition-duration: 0.2s;
+  display: inline-block;
 }
