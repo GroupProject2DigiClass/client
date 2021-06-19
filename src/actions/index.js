@@ -28,7 +28,7 @@ export const addClass = async (classData, task) => {
         console.log(data);
       }
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   } else {
     try {
@@ -38,6 +38,28 @@ export const addClass = async (classData, task) => {
       }
     } catch (error) {
       console.log(error.message);
+    }
+  }
+};
+
+export const addLecture = async (lectureData, task) => {
+  if (task == "ADD") {
+    try {
+      let data = await api.createLecture(lectureData);
+      if (data) {
+        console.log(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  } else {
+    try {
+      let data = await api.editLecture(lectureData);
+      if (data) {
+        console.log(data);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 };

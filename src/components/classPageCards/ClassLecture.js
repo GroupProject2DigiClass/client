@@ -1,5 +1,5 @@
 import React from "react";
-import {} from "../../actions";
+import { addLecture } from "../../actions";
 import {
   List,
   TextField,
@@ -15,8 +15,12 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import FlareIcon from "@material-ui/icons/Flare";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-
-const ClassLectureCard = ({ task, classKey, unitN, unit }) => {
+import { useLocation } from "react-router-dom";
+import { IndeterminateCheckBoxOutlined } from "@material-ui/icons";
+import { useParams } from "react-router-dom";
+const ClassLectureCard = ({ unitN, unit }) => {
+  const [classKey, editClassKey] = React.useState("00000");
+  const [task, editTask] = React.useState("ADD");
   const [dataCard, setData] = React.useState({
     classKey: classKey,
     assignmentKey: "",
@@ -25,14 +29,16 @@ const ClassLectureCard = ({ task, classKey, unitN, unit }) => {
     unit: unit,
     topics: [],
     files: [],
+    completed: 0,
   });
-
   const [validator, setValidator] = React.useState({
     title: false,
     unitN: false,
     unit: false,
     topic: false,
   });
+
+  const location = useLocation();
 
   let [topics, setTopics] = React.useState(-1);
 
@@ -49,6 +55,10 @@ const ClassLectureCard = ({ task, classKey, unitN, unit }) => {
   let [tempF, changeF] = React.useState(1);
 
   let [tempR, changeR] = React.useState(1);
+
+  React.useEffect(() => {
+    if (file != undefined) changeF(tempF + 1);
+  }, [file]);
 
   React.useEffect(() => {
     var index = topics;
@@ -82,8 +92,6 @@ const ClassLectureCard = ({ task, classKey, unitN, unit }) => {
     if (file !== null) {
       var arr = dataCard.files;
       arr.push(file);
-      console.log(file.name);
-      console.log(dataCard);
       addFile(null);
     }
   }, [tempF]);
@@ -98,16 +106,32 @@ const ClassLectureCard = ({ task, classKey, unitN, unit }) => {
     }
   }, [tempR]);
 
-  const HandleSubmit = () => {};
+  const HandleSubmit = () => {
+    console.log(dataCard);
+    addLecture(dataCard, "ADD");
+  };
 
   React.useEffect(() => {
+    var key = window.location.pathname;
+    key = key.substring(6, key.length);
+    editClassKey(key);
+
+    var option = location.state.task;
+    editTask(option);
+
+    const zeroPad = (num, places) => String(num).padStart(places, "0");
     var today = new Date();
     var year = today.getFullYear();
     var month = today.getMonth();
+    month = zeroPad(month, 2);
     var day = today.getDate();
+    day = zeroPad(day, 2);
     var hour = today.getHours();
+    hour = zeroPad(hour, 2);
     var min = today.getMinutes();
+    min = zeroPad(min, 2);
     var sec = today.getSeconds();
+    sec = zeroPad(sec, 2);
     var code = classKey;
     var key =
       code +
@@ -124,8 +148,9 @@ const ClassLectureCard = ({ task, classKey, unitN, unit }) => {
       ":" +
       sec;
     setData({ ...dataCard, assignmentKey: key });
+    console.log(task);
   }, []);
-
+  // console.log(classKey);
   return (
     <div>
       <div
@@ -312,7 +337,7 @@ const ClassLectureCard = ({ task, classKey, unitN, unit }) => {
                 ...validator,
                 topic: e.target.value.length < 2,
               });
-              setTopic(e.target.value.trim());
+              setTopic(e.target.value);
             }}
             error={validator.topic}
             style={{
@@ -345,6 +370,7 @@ const ClassLectureCard = ({ task, classKey, unitN, unit }) => {
         </div>
         <List style={{ width: "90%" }}>
           {dataCard.files.map((unit, index) => {
+            // console.log(dataCard.files[index]);
             return (
               <ListItem
                 style={{
@@ -355,7 +381,9 @@ const ClassLectureCard = ({ task, classKey, unitN, unit }) => {
                   color: "blue",
                 }}
               >
-                <ListItemText primary={unit.name} />
+                <ListItemText>
+                  {unit.name != undefined ? unit.name : "File"}
+                </ListItemText>
                 <ListItemSecondaryAction edge="end" aria-label="delete">
                   <IconButton
                     style={{ color: "#007FFF" }}
@@ -377,8 +405,10 @@ const ClassLectureCard = ({ task, classKey, unitN, unit }) => {
               style={{ display: "none" }}
               type="file"
               onChange={(e) => {
-                changeF(tempF + 1);
-                addFile(e.target.files[0]);
+                // const data = new FormData();
+                const file = e.target.files[0];
+                // data.append(file.name, file);
+                addFile(file);
               }}
             />
 
