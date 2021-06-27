@@ -6,3 +6,9 @@
 .classCard:hover {
   border: 2px solid blue;
 }
+
+.listIcon:hover {
+  transform: scale(1.5);
+  transition-duration: 1s;
+  background-color: "yellow";
+}
