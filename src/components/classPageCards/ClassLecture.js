@@ -18,9 +18,11 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { useLocation } from "react-router-dom";
 import { IndeterminateCheckBoxOutlined } from "@material-ui/icons";
 import { useParams } from "react-router-dom";
-const ClassLectureCard = ({ unitN, unit }) => {
+const ClassLectureCard = ({}) => {
   const [classKey, editClassKey] = React.useState("00000");
   const [task, editTask] = React.useState("ADD");
+  const [unit, editUnit] = React.useState("Temp");
+  const [unitN, editUnitN] = React.useState(1);
   const [dataCard, setData] = React.useState({
     classKey: classKey,
     assignmentKey: "",
@@ -119,6 +121,12 @@ const ClassLectureCard = ({ unitN, unit }) => {
     var option = location.state.task;
     editTask(option);
 
+    var chapter = location.state.unit;
+    editUnit(chapter);
+
+    var chapterN = location.state.unitN;
+    editUnitN(chapterN);
+
     const zeroPad = (num, places) => String(num).padStart(places, "0");
     var today = new Date();
     var year = today.getFullYear();
@@ -148,9 +156,7 @@ const ClassLectureCard = ({ unitN, unit }) => {
       ":" +
       sec;
     setData({ ...dataCard, assignmentKey: key });
-    console.log(task);
   }, []);
-  // console.log(classKey);
   return (
     <div>
       <div

@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import { useLocation } from "react-router-dom";
 import { getAllLecture, getStatus } from "../api";
 import { useHistory } from "react-router-dom";
+import ChatPage from "./chat";
 
 export default function Class() {
   const LECTURE = "lecture";
@@ -87,7 +88,11 @@ export default function Class() {
   const addClass = () => {
     history.push({
       pathname: "/page/" + classData.classKey,
-      state: { task: "EDIT" },
+      state: {
+        task: "ADD",
+        unit: classLectures[0].unit,
+        unitN: classLectures[0].unitN,
+      },
     });
   };
 
@@ -264,22 +269,26 @@ export default function Class() {
                 textColor: `${classData.headTextColor}`,
               }}
             >
-              {rollNo === "TEACHER" ? (
-                <diV>
-                  <Button
-                    onClick={() => {
-                      addClass();
-                    }}
-                    style={{
-                      fontWeight: "700",
-                    }}
-                    color="secondary"
-                  >
-                    + Add
-                  </Button>
-                </diV>
+              {activeFrame.frame === "LECTURE" ? (
+                rollNo === "TEACHER" ? (
+                  <diV>
+                    <Button
+                      onClick={() => {
+                        addClass();
+                      }}
+                      style={{
+                        fontWeight: "700",
+                      }}
+                      color="secondary"
+                    >
+                      + Add
+                    </Button>
+                  </diV>
+                ) : (
+                  `${rollNo}:`
+                )
               ) : (
-                `${rollNo}:`
+                ""
               )}
             </diV>
             <div>
@@ -294,6 +303,7 @@ export default function Class() {
                   frontColor={classData.headBackgroundColor}
                   lectures={classLectures}
                   status={classStatus}
+                  rollNo={rollNo}
                 />
               ) : activeFrame.frame === PRACTICE ? (
                 <ClassPracticeTable
@@ -301,7 +311,12 @@ export default function Class() {
                   frontColor={classData.headBackgroundColor}
                 />
               ) : (
-                CHAT
+                <ChatPage
+                  classKey={classData.classKey}
+                  rollNo={rollNo}
+                  headBackgroundColor={classData.headBackgroundColor}
+                  bodyBackgroundColor={classData.bodyBackgroundColor}
+                />
               )}
             </div>
           </div>
