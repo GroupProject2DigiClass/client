@@ -1,14 +1,33 @@
 import React from "react";
 import "./card/style.css";
 import TurnedInIcon from "@material-ui/icons/TurnedIn";
+import { useHistory } from "react-router-dom";
 
-const ClassLectureTable = ({ backColor, frontColor, lectures, status }) => {
+const ClassLectureTable = ({
+  backColor,
+  frontColor,
+  lectures,
+  status,
+  rollNo,
+}) => {
   React.useEffect(async () => {
-    console.log(lectures);
-    console.log(status);
+    // console.log(lectures);
+    // console.log(status);
     lectures.sort((a, b) => a.assignmentKey > b.assignmentKey);
     status.sort((a, b) => a.assignmentKey > b.assignmentKey);
   }, []);
+  const history = useHistory();
+  const moveToLecture = (key, title, bookmark, completed) => {
+    history.push({
+      pathname: "/lecture/" + key,
+      state: {
+        title: title,
+        bookmark: bookmark,
+        completed: completed,
+        rollNo: rollNo,
+      },
+    });
+  };
 
   return (
     <diV>
@@ -32,6 +51,14 @@ const ClassLectureTable = ({ backColor, frontColor, lectures, status }) => {
                     fontWeight: "600",
                     fontStyle: "italic",
                     display: "flex",
+                  }}
+                  onClick={() => {
+                    moveToLecture(
+                      unit.assignmentKey,
+                      unit.title,
+                      status[index].bookmark,
+                      status[index].completed
+                    );
                   }}
                   className="unit"
                 >
