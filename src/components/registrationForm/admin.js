@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function AdminForm() {
+  
   const [userData, setUserData] = React.useState({
     name: "name",
     instituteName: "abc School",
