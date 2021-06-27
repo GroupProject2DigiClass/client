@@ -1,0 +1,83 @@
+.a {
+    margin-bottom: 20px;
+    margin-top: 30px;
+    color: rgb(0, 102, 219);
+  }
+  
+.assignstu{
+background-color: rgb(255, 255, 255);
+padding: 10px;
+margin: 10px;
+border-radius: 1%;
+}  
+.tablerow{
+background-color: yellow;
+
+}
+.tablecol{
+
+padding: 100px;
+}
+.table1{
+    width: 100%;
+}
+.head{
+   text-align: center;
+   color:blue;
+   padding-top: 20px;
+   padding-bottom: 20px;
+}
+.assign{
+   
+    padding: 20px;
+    height: 100vh;
+}
+.materialcheck{
+    color: rgb(0, 105, 109);
+}
+.materialdoing{
+    color: rgb(211, 121, 3);
+}
+.assiindiv{
+    background-color:rgb(220, 248, 244);
+    max-width: 300px;
+    padding: 8px;
+    margin:1px;
+}
+.assiindiv1{
+    background-color:rgb(255, 255, 255);
+  
+    padding: 8px;
+    margin:10px;
+   
+    margin-right: 350px;
+    
+}
+.assiindiv2{
+    position: relative;
+    
+    color:green;
+    background-color: aqua;
+}
+.assidiv2{
+    background-color:rgb(253, 253, 253);
+
+}
+.assidiv4{
+    display: inline-block;
+    
+}
+.assidiv5{
+    display: inline-block;
+    margin-left: 20px;
+}
+.assiindiv6{
+    background-color:rgb(234, 254, 255);
+    height: auto;
+    padding:20px;
+    margin:auto;
+    
+    padding: 1.5rem;
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,0.302),0 2px 6px 2px rgba(60,64,67,0.149);
+    border-radius: 0.5rem;
+}

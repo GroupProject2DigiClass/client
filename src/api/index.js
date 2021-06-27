@@ -24,3 +24,23 @@ export const createClass = async (data) => {
     })
     .then(() => {});
 };
+
+export const fetchallAssignmentsApi = async (data) => {
+  var data;
+  await axios
+    .post("http://localhost:5005/makeassignment/getSubjectassignment", data)
+    .then((res) => {
+      console.log(res);
+      data=res;
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .then(() => {});
+
+    return data;
+};
+
+
+
+

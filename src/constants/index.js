@@ -39,3 +39,7 @@ export const ADD_ADMIN = "ADD_ADMIN";
 export const ADD_CLASS = "ADD_CLASS";
 
 export const ADMIN = "ADMIN";
+
+
+//assignment page constants
+export const ALL_ASSIGNMENTS="ALL_ASSIGNMENTS";

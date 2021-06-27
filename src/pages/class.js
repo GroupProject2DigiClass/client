@@ -3,7 +3,8 @@ import AStatusCard from "./../components/classStatusCards/AssignmentCard";
 import LStatusCard from "./../components/classStatusCards/LectureCard";
 import PStatusCard from "./../components/classStatusCards/PracticeCard";
 import CStatusCard from "./../components/classStatusCards/ChatCard";
-import ClassAssignmentTable from "../components/classFrames/assignment";
+//import ClassAssignmentTable from "../components/classFrames/assignment";
+import ClassAssignmentTable from "../pages/Assignment_student1";
 import ClassLectureTable from "../components/classFrames/lecture";
 import ClassPracticeTable from "../components/classFrames/practice";
 
@@ -22,7 +23,7 @@ export default function Class() {
   var subjectName = "Test Corse 1";
   var subjectType = "Temp";
   var assignmentCompleted = 2;
-  var assignmentTotal = 3;
+  var assignmentTotal = 5;
   var lectureCompleted = 10;
   var lectureTotal = 12;
   var practiceCompleted = 8;
