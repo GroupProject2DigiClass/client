@@ -3,7 +3,8 @@ import AStatusCard from "./../components/classStatusCards/AssignmentCard";
 import LStatusCard from "./../components/classStatusCards/LectureCard";
 import PStatusCard from "./../components/classStatusCards/PracticeCard";
 import CStatusCard from "./../components/classStatusCards/ChatCard";
-import ClassAssignmentTable from "../components/classFrames/assignment";
+//import ClassAssignmentTable from "../components/classFrames/assignment";
+import ClassAssignmentTable from "../pages/Assignment_student1";
 import ClassLectureTable from "../components/classFrames/lecture";
 import ClassPracticeTable from "../components/classFrames/practice";
 import Button from "@material-ui/core/Button";
@@ -49,7 +50,7 @@ export default function Class() {
   });
 
   const history = useHistory();
-  var rollNo = "TEACHER";
+  var rollNo = "19106";
 
   React.useEffect(async () => {
     var data = location.state.data;
