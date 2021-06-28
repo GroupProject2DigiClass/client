@@ -1,6 +1,6 @@
 import * as api from "../api";
 import { useDispatch } from "react-redux";
-import { ADD_STUDENT, ADD_TEACHER, ADD_CLASS } from "./../constants";
+import { ADD_STUDENT, ADD_TEACHER, ADD_CLASS, ALL_ASSIGNMENTS } from "./../constants";
 
 export const addStudent = (userData) => async (dispatch) => {
   try {
@@ -61,5 +61,22 @@ export const addLecture = async (lectureData, task) => {
     } catch (error) {
       console.log(error);
     }
+  }
+};
+
+export const fetchallAssignments = (classData) =>  async (dispatch) => {
+ 
+  try {
+    console.log(classData);
+    const data = await api.fetchallAssignmentsApi(classData);
+    if (data) {
+      //console.log(data);
+      dispatch({ type: "ALL_ASSIGNMENTS", payload: data });
+    }
+  }
+  catch (error) {
+    console.log(error.message);
+    console.log("error in index/actions");
+
   }
 };

@@ -3,7 +3,8 @@ import AStatusCard from "./../components/classStatusCards/AssignmentCard";
 import LStatusCard from "./../components/classStatusCards/LectureCard";
 import PStatusCard from "./../components/classStatusCards/PracticeCard";
 import CStatusCard from "./../components/classStatusCards/ChatCard";
-import ClassAssignmentTable from "../components/classFrames/assignment";
+//import ClassAssignmentTable from "../components/classFrames/assignment";
+import ClassAssignmentTable from "../pages/Assignment_student1";
 import ClassLectureTable from "../components/classFrames/lecture";
 import ClassPracticeTable from "../components/classFrames/practice";
 import Button from "@material-ui/core/Button";
@@ -269,7 +270,7 @@ export default function Class() {
                 textColor: `${classData.headTextColor}`,
               }}
             >
-              {activeFrame.frame === "LECTURE" ? (
+              {activeFrame.frame === LECTURE ? (
                 rollNo === "TEACHER" ? (
                   <diV>
                     <Button
@@ -287,8 +288,22 @@ export default function Class() {
                 ) : (
                   `${rollNo}:`
                 )
+              ) : activeFrame.frame === PRACTICE && rollNo === "TEACHER" ? (
+                <diV>
+                  <Button
+                    onClick={() => {
+                      //Add Practice
+                    }}
+                    style={{
+                      fontWeight: "700",
+                    }}
+                    color="secondary"
+                  >
+                    + Add
+                  </Button>
+                </diV>
               ) : (
-                ""
+                `${rollNo}:`
               )}
             </diV>
             <div>
@@ -309,6 +324,7 @@ export default function Class() {
                 <ClassPracticeTable
                   backColor={classData.bodyBackgroundColor}
                   frontColor={classData.headBackgroundColor}
+                  classKey={classData.classKey}
                 />
               ) : (
                 <ChatPage

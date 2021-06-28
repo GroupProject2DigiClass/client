@@ -50,9 +50,7 @@ const PStatusCard = ({
             }}
           >
             <div style={{ height: "50%", alignItem: "baseline" }}>Practice</div>
-            <div>
-              {completed}/{total}
-            </div>
+            <div>Question</div>
           </div>
         </center>
       </div>
