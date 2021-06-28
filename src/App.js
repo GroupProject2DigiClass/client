@@ -17,19 +17,15 @@ const App = () => {
   const [state, dispatch] = useReducer(combineReducers, {});
 
   return (
-
     <BrowserRouter>
       <div style={{ height: "100%", width: "100%" }}>
         <main>
           <Route path="/" component={Home} exact />
           <Route path="/register" component={Register} exact />
           <Route path="/class" component={Class} exact />
-
-          
-          <Route path="/assignmentT" component={assignmentT} exact/>
-          <Route path="/assignmentS" component={assignmentS} exact/> 
-          <Route path="/assignmentIS/:id" component={assignindividual} /> 
-          
+          <Route path="/assignmentT" component={assignmentT} exact />
+          <Route path="/assignmentS" component={assignmentS} exact />
+          <Route path="/assignmentIS/:id" component={assignindividual} />
           <Route path="/page/:id" component={CardPage} />
           <Route path="/lecture/:id" component={LecturePage} />
           <Route path="/chat" component={ChatPage} exact />

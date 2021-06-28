@@ -50,7 +50,7 @@ export default function Class() {
   });
 
   const history = useHistory();
-  var rollNo = "19106";
+  var rollNo = "TEACHER";
 
   React.useEffect(async () => {
     var data = location.state.data;
@@ -270,7 +270,7 @@ export default function Class() {
                 textColor: `${classData.headTextColor}`,
               }}
             >
-              {activeFrame.frame === "LECTURE" ? (
+              {activeFrame.frame === LECTURE ? (
                 rollNo === "TEACHER" ? (
                   <diV>
                     <Button
@@ -288,8 +288,22 @@ export default function Class() {
                 ) : (
                   `${rollNo}:`
                 )
+              ) : activeFrame.frame === PRACTICE && rollNo === "TEACHER" ? (
+                <diV>
+                  <Button
+                    onClick={() => {
+                      //Add Practice
+                    }}
+                    style={{
+                      fontWeight: "700",
+                    }}
+                    color="secondary"
+                  >
+                    + Add
+                  </Button>
+                </diV>
               ) : (
-                ""
+                `${rollNo}:`
               )}
             </diV>
             <div>
@@ -310,6 +324,7 @@ export default function Class() {
                 <ClassPracticeTable
                   backColor={classData.bodyBackgroundColor}
                   frontColor={classData.headBackgroundColor}
+                  classKey={classData.classKey}
                 />
               ) : (
                 <ChatPage
