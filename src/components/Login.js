@@ -19,11 +19,11 @@ function Login() {
     console.log(token);
     console.log(result);
     console.log(res.accessToken);
-
+  
     try {
       dispatch({ type: AUTH, data: { result, token } });
-
-      history.push("/home");
+    
+      window.location.replace("/");
     } catch (error) {
       console.log(error);
     }

@@ -37,9 +37,9 @@ export const editClass = async (data) => {
     .then(() => {});
 };
 
-export const getAllClass = async () => {
+export const getAllClass = async (data) => {
   var result;
-  await axios.post("http://localhost:5005/makeclass/getAll").then((res) => {
+  await axios.post("http://localhost:5005/makeclass/getAll",data).then((res) => {
     result = res;
   });
   return result;
@@ -142,14 +142,13 @@ export const getMessage = async (data) => {
   return result;
 };
 
-
 export const fetchallAssignmentsApi = async (data) => {
   var data;
   await axios
     .post("http://localhost:5005/makeassignment/getSubjectassignment", data)
     .then((res) => {
       console.log(res);
-      data=res;
+      data = res;
     })
 
     .catch((err) => {
@@ -157,16 +156,19 @@ export const fetchallAssignmentsApi = async (data) => {
     })
     .then(() => {});
 
-    return data;
+  return data;
 };
 
 export const fetchindividualAssignmentsApi = async (data) => {
   var data;
   await axios
-    .post("http://localhost:5005/makeassignment/getIndividualSubjectassignment", data)
+    .post(
+      "http://localhost:5005/makeassignment/getIndividualSubjectassignment",
+      data
+    )
     .then((res) => {
       console.log(res);
-      data=res;
+      data = res;
     })
 
     .catch((err) => {
@@ -174,5 +176,31 @@ export const fetchindividualAssignmentsApi = async (data) => {
     })
     .then(() => {});
 
-    return data;
+  return data;
+};
+
+export const getAllPractice = async (data) => {
+  var data;
+  await axios.post("http://localhost:5005/makepractice/", data).then((res) => {
+    data = res;
+  });
+  return data;
+};
+
+export const postPractice = async (data) => {
+  var data;
+  await axios
+    .post("http://localhost:5005/makepractice/add", data)
+    .then((res) => {
+      data = res;
+    });
+  return data;
+};
+
+export const getGivenPractice = async (data) => {
+  var data;
+  await axios.post("http://localhost:5005/makepractice/given", data).then((res) => {
+    data = res;
+  });
+  return data;
 };

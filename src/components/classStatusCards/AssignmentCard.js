@@ -32,6 +32,7 @@ const AStatusCard = ({
         }}
         className="skillCard"
       >
+        
         <div>
           <BsFileEarmarkText size={80} color={backgroundColor} />
         </div>

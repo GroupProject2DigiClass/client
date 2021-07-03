@@ -6,17 +6,18 @@ import FileBase from "react-file-base64";
 import { addTeacher } from "./../../actions";
 //imp code template below                    
 import axios from "axios";
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 //for redirecting to
-import  { Redirect } from 'react-router-dom'
-import { useHistory,useLocation } from "react-router-dom";
+import { Redirect } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 var user = JSON.parse(localStorage.getItem('profile'));
 var gtoken;
 if(user){
 gtoken=user.token;
 }
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,73 +31,108 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function TeacherForm() {
-  let location=useLocation();
+
+
+const zeroPad = (num, places) => String(num).padStart(places, "0");
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = today.getMonth();
+    month = zeroPad(month, 2);
+    var day = today.getDate();
+    day = zeroPad(day, 2);
+    var hour = today.getHours();
+    hour = zeroPad(hour, 2);
+    var min = today.getMinutes();
+    min = zeroPad(min, 2);
+   
+
+
+export default function PracticeForm() {
+  var sec = today.getSeconds();
+  sec = zeroPad(sec, 2);
   
-var key =window.location.pathname;
-var url =key.split("/");
-console.log(url);
-  
+
   const [userData, setUserData] = React.useState({
-    name: "",//title
-    instituteID: "",//POINTS IN ASSIGNMENT
-    rank: TEACHER,
-    teacherID: "",//instructions
-    email: "",
-    classes: "",//semester
-    sections: "",//branch
-    profileLink: "",//DRIVE LINK FOR ASSIGNMENT
+    title: "",//title
+    unitN: 1,//semester
+    unit: "",//branch
     images: "",
-    driveLink: "",
-    DOB: "01-01-2001",//due date
-    DOB1:""//due time
+    instructions:"",
+    driveLink:"",
+    
   });
   let history = useHistory();
 
+
+
+
+
+  var keyis =window.location.pathname;
+  var url =keyis.split("/");
+  console.log(url);
+  
+  var key =
+  url[2]+
+  year +
+  ":" +
+  month +
+  ":" +
+  day +
+  ":" +
+  hour +
+  ":" +
+  min +
+  ":" +
+  sec;
+
   const handleSubmit = async (e) => {
-    
+
     console.log("Teacher Submit");
     console.log(userData);
     e.preventDefault();
     console.log(userData);
-  
+console.log(url[2]);
+
     const assignmentdata = {
-      token:gtoken,  
       classKey:url[2],
-      title: userData.name,
-      points: userData.instituteID,
-      instruction: userData.teacherID,
-      driveLink: userData.profileLink,
-      dueDate: userData.DOB,
-      dueTime: userData.DOB1,
-      semester: userData.classes,
-      branch: userData.sections
+      assignmentKey: key,
+      title: userData.title,
+      instruction: userData.instructions,
+      unitN: userData.unitN,
+      unit: userData.unit,
+      files: userData.images,
+     token:gtoken,
+     driveLink: userData.driveLink,
     };
     console.log(assignmentdata);
-    
+
     e.preventDefault();
+    var datam;
     try {
-      const dataw = await axios.post(
-        "http://localhost:5005/makeassignment/postnewassignment",
+     const dataw = await axios.post(
+        "http://localhost:5005/makepractice/add",
         assignmentdata
       );
-      
-      console.log(dataw);
+
+datam=dataw;
+
+      console.log(dataw.data);
+
       alert(dataw.data);
-      
-      
       //console.log(postdata);
-     // history.goBack()
-     //e.history.push('/');
-     window.history.back();
+      // history.goBack()
+      //e.history.push('/');
+      window.history.back();
 
     } catch (err) {
-      alert("error occurred while posting assignment");
-      console.log(err);
+
+      
+      alert(err.message);
+
     }
-    
+
   };
-  
+
 
   const classes = useStyles();
 
@@ -104,7 +140,7 @@ console.log(url);
 
   const regExp = RegExp(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/);
 
-  
+
 
   return (
     <div style={{ width: "70%", paddingBottom: "100px" }}>
@@ -112,30 +148,30 @@ console.log(url);
         <div style={{ paddingBottom: "60px" }}>
           <TextField
             variant="standard"
-            name="name"
+            name="title"
             fullWidth
             label="Title"
-            value={userData.name}
+            value={userData.title}
             onChange={(e) => {
-              setUserData({ ...userData, name: e.target.value });
+              setUserData({ ...userData, title: e.target.value });
             }}
             // helperText="At least four characters."
-            error={userData.name.trim().length > 3 ? false : true}
+            error={userData.title.trim().length > 3 ? false : true}
             style={{ marginTop: "8px" }}
             className={classes.textField}
           />
           <div style={{ paddingTop: "60px" }}>
             <TextField
               variant="standard"
-              name="teacherID"
+              name="instruction"
               fullWidth
               label="Instructions."
-              value={userData.teacherID}
+              value={userData.instruction}
               onChange={(e) => {
-                setUserData({ ...userData, teacherID: e.target.value });
+                setUserData({ ...userData, instructions: e.target.value });
               }}
               // helperText="At least two characters."
-              error={userData.name.trim().length > 2 ? false : true}
+              error={userData.instructions.trim().length > 2 ? false : true}
               style={{ marginTop: "8px" }}
               className={classes.textField}
             />
@@ -143,19 +179,23 @@ console.log(url);
           <div style={{ paddingTop: "60px" }}>
             <TextField
               variant="standard"
-              name="instituteID"
+              name="driveLink"
               fullWidth
-              label="Points"
-              value={userData.instituteID}
+              label="driveLink."
+              value={userData.driveLink}
               onChange={(e) => {
-                setUserData({ ...userData, instituteID: e.target.value });
+                setUserData({ ...userData, driveLink: e.target.value });
               }}
               // helperText="At least two characters."
-              error={userData.instituteID.trim().length > 2 ? false : true}
+              error={userData.driveLink.trim().length > 0 ? false : true}
               style={{ marginTop: "8px" }}
               className={classes.textField}
             />
           </div>
+          
+
+          
+          
           
           <div
             style={{
@@ -165,127 +205,56 @@ console.log(url);
               alignContent: "center",
             }}
           >
-            <div
-              style={{
-                paddingLeft: "50px",
-                paddingRight: "50px",
-              }}
-            >
-              <TextField
-                variant="standard"
-                name="class"
-                fullWidth
-                label="Semesters"
-                value={userData.class}
-                onChange={(e) => {
-                  setUserData({
-                    ...userData,
-                    classes: e.target.value
-                  });
-                }}
-                error={userData.classes.length > 0 ? false : true}
-                style={{ marginTop: "8px" }}
-                className={classes.textField}
-              />
-            </div>
-            <div
-              style={{
-                paddingLeft: "50px",
-                paddingRight: "50px",
-              }}
-            >
-              <TextField
-                variant="standard"
-                name="section"
-                fullWidth
-                label="Branches"
-                value={userData.sections}
-                onChange={(e) => {
-                  setUserData({
-                    ...userData,
-                    sections: e.target.value
-                  });
-                }}
-                error={userData.sections.length > 0 ? false : true}
-                style={{ marginTop: "8px" }}
-                className={classes.textField}
-              />
-            </div>
-          </div>
           <div
-            style={{
-              paddingTop: "60px",
-              display: "flex",
-              justifyContent: "center",
-            }}
-            className="row"
-          >
-           
-            <div
               style={{
-                fontWeight: "600",
-                paddingRight: "20px",
-                paddingLeft: "100px",
-                marginTop: "15px",
-                display: "flex",
-                height: "100%",
+                paddingLeft: "50px",
+                paddingRight: "50px",
               }}
             >
-              Due Date:
-            </div>
-            <div>
               <TextField
+              
                 variant="standard"
-                name="DOB"
+                name="unitN"
                 fullWidth
-                value={userData.DOB}
-                type="date"
+                label="Unit No."
+                value={userData.unitN}
                 onChange={(e) => {
-                  setUserData({ ...userData, DOB: e.target.value });
+                  setUserData({
+                    ...userData,
+                    unitN:Number(e.target.value)
+                  });
                 }}
+                error={userData.unitN > 0 ? false : true}
                 style={{ marginTop: "8px" }}
+                className={classes.textField}
               />
             </div>
-            
             <div
               style={{
-                fontWeight: "600",
-                paddingRight: "20px",
-                paddingLeft: "100px",
-                marginTop: "15px",
-                display: "flex",
-                height: "100%",
+                paddingLeft: "50px",
+                paddingRight: "50px",
               }}
             >
-              Time:
-            </div>
-            <div>
               <TextField
                 variant="standard"
-                name="DOB1"
+                name="unit"
                 fullWidth
-                value={userData.DOB1}
-                type="time"
+                label="Unit "
+                value={userData.unit}
                 onChange={(e) => {
-                  setUserData({ ...userData, DOB1: e.target.value });
+                  setUserData({
+                    ...userData,
+                    unit: e.target.value
+                  });
                 }}
+                error={userData.unit.length > 0 ? false : true}
                 style={{ marginTop: "8px" }}
+                className={classes.textField}
               />
             </div>
-          </div>
-          <div style={{ paddingTop: "60px" }}>
-            <TextField
-              variant="standard"
-              name="profileLink"
-              fullWidth
-              label="Drive Link(Optional)"
-              value={userData.profileLink}
-              onChange={(e) => {
-                setUserData({ ...userData, profileLink: e.target.value });
-              }}
-              style={{ marginTop: "8px" }}
-            />
-          </div>
+            </div>
+          
+
           <div
             style={{
               paddingTop: "10px",
@@ -326,8 +295,5 @@ console.log(url);
     </div>
   );
 }
-
-
-
 
 

@@ -8,7 +8,6 @@ function getRandom() {
 }
 
 export default function CardPage() {
-  var subjectTeacher = "IIITU Developers";
   var backgroundLocation =
     "/images/background" + getRandom().toString() + ".jfif";
   return (
@@ -41,7 +40,6 @@ export default function CardPage() {
                 width: "70vh",
               }}
             >
-              {/* <ClassRoomCard subjectTeacher={subjectTeacher} task="ADD" /> */}
               <ClassLectureCard
                 task="ADD"
                 unitN={1}

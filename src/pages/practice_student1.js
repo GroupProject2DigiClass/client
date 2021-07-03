@@ -11,7 +11,10 @@ import { Link } from '@material-ui/core';
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchallAssignmentsApi } from "../api";
-import { useLocation } from "react-router-dom";
+import { useLocation,useHistory } from "react-router-dom";
+
+
+import { getAllPractice } from "../../src/api/index";
 
 var user = JSON.parse(localStorage.getItem('profile'));
 var gtoken;
@@ -19,6 +22,7 @@ if(user){
 gtoken=user.token;
 }
 
+ 
 
 var rollno ="TEACHER"
 const StyledTableCell = withStyles((theme) => ({
@@ -66,9 +70,22 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CustomizedTables() {
+
+
+export default function ClassPracticeTable() {
   let location = useLocation();
+  const history = useHistory();
   const classes = useStyles();
+
+  const addPractice = () => {
+    history.push({
+      pathname: "/practice/" + location.state.data.classKey,
+      state: {
+        task: "ADD",
+      },
+    });
+  };
+
   //disapcting from here on
   /*
   const postdata=useSelector((state)=>state.assignmentReducer);
@@ -82,7 +99,7 @@ export default function CustomizedTables() {
 console.log(location.state.data);
 
   useEffect(async () => {
-    await fetchallAssignmentsApi({ classKey: location.state.data.classKey,token:gtoken }).then((e) => {
+    await getAllPractice({ classKey: location.state.data.classKey,token:gtoken }).then((e) => {
       editdata(e.data); console.log(e);
     });
 
@@ -101,41 +118,25 @@ console.log(location.state.data);
 
   }
 
-  function watermark(duedate){
-    var key=duedate.split("-");
-    var day=key[2];
-    var month=key[1];
-    var year=key[0];
-
-    var today= new Date();
-    console.log(today.getDate());
-    console.log(today.getMonth());
-    console.log(today.getYear());
-    
-    
-    if(today.getDate()==day && today.getMonth()+1==month){ return "Duetoday";}
-    else if(today.getDate()+1==day && today.getMonth()+1==month){ return "Duetomorrow";}
-    else if(day-today.getDate()>=2 && today.getMonth()+1==month){ return "DueThisweek";}
-    else if(day-today.getDate()>7 && today.getMonth()+1==month){ return "DueThismonth";}
-    return "older";
-  }
+ 
 
   return (
     <div className="assign">
+        
       <h2 className="head">
-        All Assignments
-          </h2>
+        All Practices Exercises
+      </h2>
+      <button className="buttonpractice" onClick={addPractice} >+</button>
       
 
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Title</StyledTableCell>
-              <StyledTableCell align="right">Due Date</StyledTableCell>
-              <StyledTableCell align="right">Due Time</StyledTableCell>
-              <StyledTableCell align="right">Remark</StyledTableCell>
-
+              <StyledTableCell>Unit Name</StyledTableCell>
+              <StyledTableCell align="right">Title</StyledTableCell>
+              <StyledTableCell align="right">Tryit</StyledTableCell>
+              
 
             </TableRow>
           </TableHead>
@@ -143,17 +144,14 @@ console.log(location.state.data);
             {postdata.map((post) => (
               <StyledTableRow key={post._id}>
                 <StyledTableCell component="th" scope="row"  >
-              <Link href={'/assignmentIS' +'/'+rollno+'/' + post._id }>
-              {post.title}
-              </Link>
-                 
-
-
+                {post.unit}
                 </StyledTableCell>
-                <StyledTableCell align="right">{post.dueDate}</StyledTableCell>
-                <StyledTableCell align="right">{post.dueTime}</StyledTableCell>
-                <StyledTableCell align="right">{watermark(post.dueDate)}</StyledTableCell>
-
+                <StyledTableCell align="right">{post.title}</StyledTableCell>
+                <StyledTableCell align="right">
+                <Link href={'/Indipractice' +'/' + post.assignmentKey}>
+                <StyledTableCell align="right"><img  src="https://img.icons8.com/color/48/000000/exercise-skin-type-3.png"/></StyledTableCell>
+              </Link>
+                </StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
