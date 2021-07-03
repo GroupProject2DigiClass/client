@@ -1,7 +1,13 @@
 import React from "react";
 import { getAllPractice } from "../../api";
 
+import { useHistory } from "react-router-dom";
+
+
 const ClassPracticeTable = ({ backColor, frontColor, classKey }) => {
+
+  const history = useHistory();
+  
   const [data, editData] = React.useState([]);
   React.useEffect(async () => {
     await getAllPractice({ classKey: classKey }).then((res) => {
@@ -30,6 +36,11 @@ const ClassPracticeTable = ({ backColor, frontColor, classKey }) => {
                   }}
                   onClick={() => {
                     // Go to practice page
+                    history.push({ 
+                      pathname: "/Indipractice/" +unit.assignmentKey,
+
+                    });
+                    
                   }}
                   className="unit"
                 >

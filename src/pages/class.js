@@ -2,16 +2,19 @@ import React from "react";
 import AStatusCard from "./../components/classStatusCards/AssignmentCard";
 import LStatusCard from "./../components/classStatusCards/LectureCard";
 import PStatusCard from "./../components/classStatusCards/PracticeCard";
+//import CustomizedTablespractice from "./../components/classPageCards"
 import CStatusCard from "./../components/classStatusCards/ChatCard";
-//import ClassAssignmentTable from "../components/classFrames/assignment";
+import ClassPracticeTable from "../pages/practice_student1";
 import ClassAssignmentTable from "../pages/Assignment_student1";
 import ClassLectureTable from "../components/classFrames/lecture";
-import ClassPracticeTable from "../components/classFrames/practice";
+//import ClassPracticeTable from "../components/classFrames/practice";
 import Button from "@material-ui/core/Button";
 import { useLocation } from "react-router-dom";
 import { getAllLecture, getStatus } from "../api";
 import { useHistory } from "react-router-dom";
 import ChatPage from "./chat";
+
+
 
 export default function Class() {
   const LECTURE = "lecture";
@@ -97,6 +100,18 @@ export default function Class() {
     });
   };
 
+
+
+  
+  const addASSIGNMENT = () => {
+    history.push({
+      pathname: "/assignmentT/" + classData.classKey,
+      state: {
+        task: "ADD",
+      },
+    });
+  };
+
   return (
     <div>
       <div
@@ -109,8 +124,12 @@ export default function Class() {
               style={{
                 width: "100%",
                 backgroundColor: classData.headBackgroundColor,
-                borderRadius: "15px",
+                backgroundImage: 'url("https://gstatic.com/classroom/themes/img_backtoschool.jpg")',
+                borderRadius: "3px",
                 fontStyle: "Calibri",
+                border: "3px solid black",
+                backgroundSize: "cover",
+                
               }}
             >
               <div
@@ -127,7 +146,7 @@ export default function Class() {
                 <div
                   style={{
                     color: classData.headTextColor,
-                    fontSize: "11px",
+                    fontSize: "15px",
                     fontWeight: "bold",
                     alignSelf: "left",
                     marginTop: "10px",
@@ -138,7 +157,7 @@ export default function Class() {
                 <div
                   style={{
                     color: classData.headTextColor,
-                    fontSize: "11px",
+                    fontSize: "15px",
                     fontWeight: "bold",
                     alignSelf: "right",
                     marginTop: "10px",
@@ -177,7 +196,7 @@ export default function Class() {
             style={{
               border: "2px solid",
               borderRadius: "15px",
-              borderColor: classData.bodyBlockColor,
+              borderColor: "white",
               borderWidth: "3px",
               paddingTop: "10px",
               paddingBottom: "10px",
@@ -270,8 +289,11 @@ export default function Class() {
                 textColor: `${classData.headTextColor}`,
               }}
             >
-              {activeFrame.frame === LECTURE ? (
-                rollNo === "TEACHER" ? (
+            
+           
+
+
+              {activeFrame.frame === LECTURE ? rollNo === "TEACHER" ? (
                   <diV>
                     <Button
                       onClick={() => {
@@ -288,11 +310,12 @@ export default function Class() {
                 ) : (
                   `${rollNo}:`
                 )
-              ) : activeFrame.frame === PRACTICE && rollNo === "TEACHER" ? (
+               : activeFrame.frame === ASSIGNMENT && rollNo === "TEACHER" ? (
                 <diV>
                   <Button
                     onClick={() => {
                       //Add Practice
+                      addASSIGNMENT();
                     }}
                     style={{
                       fontWeight: "700",
@@ -304,7 +327,12 @@ export default function Class() {
                 </diV>
               ) : (
                 `${rollNo}:`
-              )}
+              )
+
+              }
+
+
+
             </diV>
             <div>
               {activeFrame.frame === ASSIGNMENT ? (

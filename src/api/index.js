@@ -37,9 +37,9 @@ export const editClass = async (data) => {
     .then(() => {});
 };
 
-export const getAllClass = async () => {
+export const getAllClass = async (data) => {
   var result;
-  await axios.post("http://localhost:5005/makeclass/getAll").then((res) => {
+  await axios.post("http://localhost:5005/makeclass/getAll",data).then((res) => {
     result = res;
   });
   return result;
@@ -199,7 +199,7 @@ export const postPractice = async (data) => {
 
 export const getGivenPractice = async (data) => {
   var data;
-  await axios.post("http://localhost:5005/makepractice/", data).then((res) => {
+  await axios.post("http://localhost:5005/makepractice/given", data).then((res) => {
     data = res;
   });
   return data;

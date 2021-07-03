@@ -60,7 +60,7 @@ padding: 100px;
     background-color: aqua;
 }
 .assidiv2{
-    background-color:rgb(253, 253, 253);
+    background-color:rgb(240, 239, 239);
 
 }
 .assidiv4{
@@ -80,4 +80,71 @@ padding: 100px;
     padding: 1.5rem;
     box-shadow: 0 1px 2px 0 rgba(60,64,67,0.302),0 2px 6px 2px rgba(60,64,67,0.149);
     border-radius: 0.5rem;
+}
+.home01{
+    color: rgb(255, 255, 255);
+    margin: auto;
+    text-align: center;
+    padding:10px;
+    border:1px solid rgb(255, 255, 255);
+    box-shadow: 1px 2.4px #abb6c0;
+    background-color: rgb(12, 0, 63);
+    font-family: fantasy;
+}
+.home02{
+    border:2px solid black ;
+    max-width: 300px;
+    min-width: 299px;
+min-height: 270px;
+border-radius:3px;
+margin:30px;
+position: relative;
+}
+.home03{
+    padding-left: 6px;
+}
+.home04{
+    background-color:yellow;
+    border-bottom: 2px solid;
+    background-image: url("https://www.gstatic.com/classroom/themes/img_learnlanguage.jpg");
+    background-size: cover;
+    color: white;
+    min-height: 90px;
+    padding:10px;
+    border-bottom: 5px solid rgb(212, 185, 185);
+}
+.home05{
+    display: inline-block; 
+    
+}
+.home06{
+    border-radius: 6px;
+    position:absolute;
+    bottom:0;
+    right:0;
+    border:none;
+}
+.home07{
+    padding:10px;
+    
+}
+
+.home08{
+    color:rgb(0, 0, 0);
+    border: none;
+    font-weight: bold;
+    background-color:none;
+}
+.logoutbutton{
+    max-width: 10px;
+    align-self: start;
+    display: flex;
+}
+.home11{
+    display: flex;
+    
+}
+.assidiv22{
+    color: aqua;
+    text-align: center;
 }

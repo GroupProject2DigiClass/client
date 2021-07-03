@@ -28,7 +28,7 @@ export default function ChatPage({
       editMessages(res.data);
     });
     console.log(messages);
-  }, [updated]);
+  }, [updated,chat]);
 
   React.useEffect(async () => {
     const zeroPad = (num, places) => String(num).padStart(places, "0");
