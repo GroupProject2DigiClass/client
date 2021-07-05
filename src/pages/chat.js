@@ -1,6 +1,20 @@
 import React from "react";
 import { Button, TextField } from "@material-ui/core";
 import { sendMessage, getMessage } from "../api";
+import axios from "axios";
+
+var user = JSON.parse(localStorage.getItem('profile'));
+var staremail; 
+var starname;
+var gtoken;
+if(user){
+  console.log(user.result);
+  
+gtoken=user.token;
+staremail=user.result.email;
+starname=user.name;
+}
+
 
 export default function ChatPage({
   classKey,
@@ -8,29 +22,47 @@ export default function ChatPage({
   headBackgroundColor,
   bodyBackgroundColor,
 }) {
-  const [chat, editChat] = React.useState("");
-  const [send, editSend] = React.useState(0);
-  const [anonymous, editAnonymous] = React.useState(false);
-  const [messages, editMessages] = React.useState([]);
-  const [updated, updateMessage] = React.useState(0);
+
+  var time1;
+function iamclock(){
+time1++;
+}
+setInterval(iamclock, 5000);
+
+
   const [data, editData] = React.useState({
     rollNo: "19401",
     classKey: "TEST001THEORY",
   });
 
-  React.useEffect(() => {
-    updateMessage(updated + 1);
-  }, []);
+
+  const [chat, editChat] = React.useState("");
+  const [send, editSend] = React.useState(0);
+  const [messages, editMessages] = React.useState([]);
+  const [anonymous,editAnonymous] = React.useState(false);
+
   React.useEffect(async () => {
     console.log(bodyBackgroundColor);
     editData({ ...chat, rollNo: rollNo, classKey: classKey });
-    await getMessage({ classKey: classKey, rollNo: rollNo }).then((res) => {
+    await getMessage({ classKey: classKey, rollNo: rollNo,token:gtoken }).then((res) => {
       editMessages(res.data);
     });
     console.log(messages);
-  }, [updated,chat]);
+  }, [send,time1]);
 
   React.useEffect(async () => {
+    console.log(bodyBackgroundColor);
+    editData({ ...chat, rollNo: rollNo, classKey: classKey });
+    await getMessage({ classKey: classKey, rollNo: rollNo,token:gtoken }).then((res) => {
+      editMessages(res.data);
+    });
+    console.log(messages);
+  }, [send]);
+
+  //funtion to send the data to the server
+
+  async function sendMessage() {
+
     const zeroPad = (num, places) => String(num).padStart(places, "0");
     var today = new Date();
     var year = today.getFullYear();
@@ -46,25 +78,151 @@ export default function ChatPage({
     sec = zeroPad(sec, 2);
     var time =
       year + ":" + month + ":" + day + ":" + hour + ":" + min + ":" + sec;
-    if (send > 0)
-      await sendMessage({
-        classKey: data.classKey,
-        sender: data.rollNo,
-        time: time,
-        message: chat,
-        anonymous: anonymous,
-      }).then((e) => console.log(e));
+
+    const data1 = {
+      classKey: data.classKey,
+      sender: "",
+      token:gtoken,
+      time: time,
+      message: chat,
+      anonymous: anonymous,
+    };
+    var result;
+    await axios.post("http://localhost:5005/makechat/send", data1).then((res) => {
+      result = res;
+    });
     editChat("");
-    updateMessage(updated + 1);
-  }, [send]);
+    editSend(send + 1);
+  }
+
+
+
+
+
 
   return (
-    <div
+    <>
+
+      <div className="chatparent">
+        <ol class="chat">
+          {
+            messages.map((unit) => {
+              if (staremail===unit.email && unit.sender==="TEACHER" ) {
+                return (<li class="self">
+                  <div class="msg">
+                    <div class="user">{unit.sender}<span class="range admin">Admin</span></div>
+                    <p>{unit.message}</p>
+                    <time>{unit.time}</time>
+                  </div>
+                </li>
+                )
+              }
+              else if(unit.sender==="TEACHER"){
+                return(
+                  <li class="other">
+                  <div class="msg">
+                    <div class="user">{unit.sender}<span class="range admin">Admin</span></div>
+                    <p>{unit.message}</p>
+                    <time>{unit.time}</time>
+                  </div>
+                </li>
+                )
+              }
+
+              else if(staremail===unit.email){
+                return (
+                  <li class="self">
+                  <div class="msg">
+                <div class="user">{unit.sender}</div>
+                <p>{unit.message}</p>
+                <time>{unit.time}</time>
+                  </div>
+                </li>
+                )
+              }
+              
+        
+        
+
+              
+              else {
+               console.log(unit.email);
+               console.log(unit.sender);
+               
+               console.log(staremail);
+               
+               
+               
+               
+                return (
+                  <li class="other">
+                  <div class="msg">
+                <div class="user">{unit.sender}</div>
+                <p>{unit.message}</p>
+                <time>{unit.time}</time>
+                  </div>
+                </li>
+                )
+              }
+
+            })
+          }
+        </ol>
+        <div class="typezone ">
+          <form>
+            <textarea class="testformessage" type="text" value={chat}
+              onChange={(e) => {
+                editChat(e.target.value);
+              }}
+              placeholder="Say something">
+            </textarea>
+
+
+
+
+            <input onClick={sendMessage}
+              class="send" />
+
+          </form>
+          <div class="emojis">
+            Anonymous :
+           <input class="checkbox" value="false" onClick={(e)=>{
+             console.log(e.target.checked);
+             
+             editAnonymous(e.target.checked)}}  type="checkbox"/>
+          </div>
+        </div>
+      </div>
+    </>
+
+  );
+}
+
+
+
+/*
+
+
+
+
+   
+
+
+    <li class="self">
+      <div class="msg">
+        <img src="https://i.imgur.com/kUPxcsI.jpg" draggable="false"/>
+        <time>20:19</time>
+      </div>
+    </li>
+
+
+
+<div
       style={{
         width: "100%",
         height: "100%",
-        alignItems: "flex-end",
-        justifyContent: "center",
+
+        justifyContent: "left",
       }}
     >
       <div>
@@ -72,12 +230,13 @@ export default function ChatPage({
           <div
             style={{
               border: `2px solid white`,
-              backgroundColor: headBackgroundColor,
+              backgroundColor: "lightblue",
               margin: "5px",
               borderRadius: "15px",
               justifyContent: "left",
               display: "flex",
               padding: "10px",
+              maxWidth:"500px",
             }}
           >
             <div
@@ -157,5 +316,7 @@ export default function ChatPage({
         </div>
       </div>
     </div>
-  );
-}
+
+
+
+*/
