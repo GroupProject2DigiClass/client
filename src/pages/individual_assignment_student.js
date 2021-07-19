@@ -284,7 +284,7 @@ export default function Assignindividual() {
                   <StyledTableCell component="th" scope="row">
                     {row.email}
                   </StyledTableCell>
-                  <StyledTableCell align="right">{row.driveLink}</StyledTableCell>
+                  <StyledTableCell align="right" href={row.driveLink}> <a href={row.driveLink} target="_blank">Click to open</a></StyledTableCell>
                   <StyledTableCell align="right">{row.flagt}</StyledTableCell>
 
 

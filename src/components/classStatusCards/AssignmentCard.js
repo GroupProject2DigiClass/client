@@ -52,7 +52,7 @@ const AStatusCard = ({
               Assignments
             </div>
             <div>
-              {completed}/{total}
+              Section
             </div>
           </div>
         </center>

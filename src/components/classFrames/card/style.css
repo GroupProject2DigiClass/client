@@ -1,8 +1,12 @@
 .unit {
-  opacity: 0.5;
+  opacity: 0.8;
+  color: rgb(0, 37, 139);
+  
 }
 .unit:hover {
   opacity: 1;
   transition-duration: 0.2s;
   display: inline-block;
+  color:rgb(248, 0, 0);
+  
 }
