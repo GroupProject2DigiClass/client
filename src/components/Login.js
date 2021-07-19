@@ -5,7 +5,7 @@ import { AUTH } from "../constants/index";
 import { GoogleLogin } from "react-google-login";
 
 // refresh token
-// import { refreshTokenSetup } from "../components/refreshgoogletoken";
+ import { refreshTokenSetup } from "../components/refreshgoogle";
 
 const clientId =
   "890645719206-kk3409c4080k85ep1iprqbtjqu9usmhk.apps.googleusercontent.com";
@@ -19,15 +19,26 @@ function Login() {
     console.log(token);
     console.log(result);
     console.log(res.accessToken);
-  
+    console.log(res);
+
+    var tokenexpiration;
+
+    var today = new Date();
+    var min = today.getMinutes() - 10;
+    var tokenexpiration = res.tokenObj.expires_at;
+    localStorage.setItem("Time_token", JSON.stringify({ tokenexpiration }));
+console.log(tokenexpiration);
+
+    
+
     try {
       dispatch({ type: AUTH, data: { result, token } });
-    
-      window.location.replace("/");
+      refreshTokenSetup(res);
+       window.location.replace("/");
     } catch (error) {
       console.log(error);
     }
-    // refreshTokenSetup(res);
+     
   };
 
   const onFailure = (res) => {

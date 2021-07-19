@@ -33,6 +33,40 @@ const ClassLectureTable = ({
     <diV>
       {lectures.length && status.length ? (
         <ul style={{ listStyle: "none" }}>
+
+<div>
+                <div
+                  style={{
+                    width: "100%",
+                    marginTop: "5px",
+                    color: "blue",
+                    borderColor: backColor,
+                    fontWeight: "1000",
+                    fontStyle: "italic",
+                    display: "flex",
+                  }}
+                
+                  className="unit"
+                >
+                  <div
+                    style={{ width: "20%", 
+                  textAlign: "left",
+                  paddingLeft: "10px",
+                  }}
+                  >Unit </div>
+
+                  <div style={{ width: "5%" }}>
+                    Bookmark
+                  </div>
+                  <div style={{ width: "50%" }}>Title</div>
+                  <div
+                    style={{ width: "25%" }}
+                  >Mark Completed</div>
+                </div>
+              </div>
+
+
+
           {lectures.map((unit, index) => (
             <li key={unit.assignmentKey}>
               <div>
@@ -63,8 +97,12 @@ const ClassLectureTable = ({
                   className="unit"
                 >
                   <div
-                    style={{ width: "20%" }}
+                    style={{ width: "20%", 
+                  textAlign: "left",
+                  paddingLeft: "10px",
+                  }}
                   >{`${unit.unitN} ${unit.unit}`}</div>
+
                   <div style={{ width: "5%" }}>
                     {status[index].bookmark ? <TurnedInIcon /> : null}
                   </div>

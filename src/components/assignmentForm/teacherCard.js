@@ -165,52 +165,7 @@ console.log(url);
               alignContent: "center",
             }}
           >
-            <div
-              style={{
-                paddingLeft: "50px",
-                paddingRight: "50px",
-              }}
-            >
-              <TextField
-                variant="standard"
-                name="class"
-                fullWidth
-                label="Semesters"
-                value={userData.class}
-                onChange={(e) => {
-                  setUserData({
-                    ...userData,
-                    classes: e.target.value
-                  });
-                }}
-                error={userData.classes.length > 0 ? false : true}
-                style={{ marginTop: "8px" }}
-                className={classes.textField}
-              />
-            </div>
-            <div
-              style={{
-                paddingLeft: "50px",
-                paddingRight: "50px",
-              }}
-            >
-              <TextField
-                variant="standard"
-                name="section"
-                fullWidth
-                label="Branches"
-                value={userData.sections}
-                onChange={(e) => {
-                  setUserData({
-                    ...userData,
-                    sections: e.target.value
-                  });
-                }}
-                error={userData.sections.length > 0 ? false : true}
-                style={{ marginTop: "8px" }}
-                className={classes.textField}
-              />
-            </div>
+            
           </div>
           <div
             style={{
@@ -286,31 +241,7 @@ console.log(url);
               style={{ marginTop: "8px" }}
             />
           </div>
-          <div
-            style={{
-              paddingTop: "10px",
-              justifyContent: "left",
-              display: "flex",
-              paddingTop: "60px",
-            }}
-          >
-            <div
-              style={{
-                fontWeight: "600",
-                verticalAlign: "middle",
-                paddingRight: "10px",
-              }}
-            >
-              Add file
-            </div>
-            <FileBase
-              type="file"
-              multiple={false}
-              onDone={({ base64 }) =>
-                setUserData({ ...userData, images: base64 })
-              }
-            />
-          </div>
+          
           <div style={{ paddingTop: "20px" }}>
             <Button
               size="large"

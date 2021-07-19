@@ -1,5 +1,5 @@
 import React from "react";
-import { addLecture } from "../../actions";
+import { addLecture } from "../../api/index";
 import {
   List,
   TextField,
@@ -32,6 +32,7 @@ const ClassLectureCard = ({}) => {
     topics: [],
     files: [],
     completed: 0,
+    token:"",
   });
   const [validator, setValidator] = React.useState({
     title: false,
@@ -108,9 +109,15 @@ const ClassLectureCard = ({}) => {
     }
   }, [tempR]);
 
-  const HandleSubmit = () => {
+  const HandleSubmit = async () => {
     console.log(dataCard);
-    addLecture(dataCard, "ADD");
+   var data1 = await addLecture(dataCard);
+   console.log(",,,,,,,,,,,,,,,,,,,");
+   
+   //alert(data1.data.message);
+   
+   window.history.back();
+   
   };
 
   React.useEffect(() => {
@@ -140,8 +147,8 @@ const ClassLectureCard = ({}) => {
     min = zeroPad(min, 2);
     var sec = today.getSeconds();
     sec = zeroPad(sec, 2);
-    var code = classKey;
-    var key =
+    var code = key;
+    var Key =
       code +
       ":" +
       year +
@@ -155,8 +162,9 @@ const ClassLectureCard = ({}) => {
       min +
       ":" +
       sec;
-    setData({ ...dataCard, assignmentKey: key });
-  }, []);
+    setData({ ...dataCard, assignmentKey: Key, classKey: key });
+    console.log(dataCard);
+  }, [validator]);
   return (
     <div>
       <div
@@ -386,10 +394,16 @@ const ClassLectureCard = ({}) => {
                   marginBottom: "10px",
                   color: "blue",
                 }}
+                
               >
-                <ListItemText>
-                  {unit.name != undefined ? unit.name : "File"}
+               {console.log(unit)}
+                
+                <ListItemText >
+                  <a href={unit} target="_blank">
+                  {unit.name != undefined ? unit.name : "Link"+(index)}
+                  </a>
                 </ListItemText>
+                
                 <ListItemSecondaryAction edge="end" aria-label="delete">
                   <IconButton
                     style={{ color: "#007FFF" }}
@@ -409,11 +423,12 @@ const ClassLectureCard = ({}) => {
           <label style={{ width: "100%" }}>
             <input
               style={{ display: "none" }}
-              type="file"
-              onChange={(e) => {
+              
+              onClick={() => {
                 // const data = new FormData();
-                const file = e.target.files[0];
+              //  const file = e.target.files[0];
                 // data.append(file.name, file);
+               const file= prompt("Enter the drive link");
                 addFile(file);
               }}
             />
@@ -423,6 +438,7 @@ const ClassLectureCard = ({}) => {
               variant="contained"
               component="span"
               style={{ width: "90%", padding: "10px", borderRadius: "10px" }}
+              
             >
               <b>Add Files</b>
             </Button>

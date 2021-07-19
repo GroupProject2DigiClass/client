@@ -143,7 +143,7 @@ console.log(location.state.data);
             {postdata.map((post) => (
               <StyledTableRow key={post._id}>
                 <StyledTableCell component="th" scope="row"  >
-              <Link href={'/assignmentIS' +'/'+rollno+'/' + post._id }>
+              <Link href={'/assignmentIS' +'/'+rollno+'/' + post._id +'/'+post.classKey}>
               {post.title}
               </Link>
                  
