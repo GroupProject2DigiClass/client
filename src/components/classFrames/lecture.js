@@ -39,14 +39,14 @@ const ClassLectureTable = ({
                   style={{
                     width: "100%",
                     marginTop: "5px",
-                    color: "blue",
+                   color:"blue",
                     borderColor: backColor,
                     fontWeight: "1000",
                     fontStyle: "italic",
                     display: "flex",
                   }}
                 
-                  className="unit"
+                  
                 >
                   <div
                     style={{ width: "20%", 
@@ -80,9 +80,9 @@ const ClassLectureTable = ({
                         : `2px solid ${frontColor}`
                     }`,
                     borderRadius: "5px",
-                    color: frontColor,
+                    
                     borderColor: backColor,
-                    fontWeight: "600",
+                    fontWeight: "800",
                     fontStyle: "italic",
                     display: "flex",
                   }}

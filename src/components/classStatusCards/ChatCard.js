@@ -58,9 +58,9 @@ const CStatusCard = ({ backgroundColor, foregroundColor, state }) => {
                 alignItem: "baseline",
               }}
             >
-              Chat Section
+              Chat 
             </div>
-            <div>{state === "0" ? "Updated" : "New"}</div>
+            <div>Section</div>
           </div>
         </div>
       </div>

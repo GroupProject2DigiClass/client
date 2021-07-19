@@ -47,7 +47,7 @@ export default function Practiceindividual() {
     </div>
     <div className="assiindiv1 container">
       <div style={{ marginBottom: "20px" }}>
-        <a href={postdata.driveLink} > Drive Link </a>
+        <a href={postdata.driveLink} target="_blank"> Drive Link </a>
       </div>
      
     </div>

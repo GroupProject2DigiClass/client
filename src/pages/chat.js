@@ -23,17 +23,23 @@ export default function ChatPage({
   bodyBackgroundColor,
 }) {
 
-  var time1;
-function iamclock(){
-time1++;
-}
-setInterval(iamclock, 5000);
+
+  const [time, setTime] = React.useState(Date.now());
+
+
+  React.useEffect(() => {
+    const interval = setInterval(() => setTime(Date.now()), 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
 
   const [data, editData] = React.useState({
     rollNo: "19401",
     classKey: "TEST001THEORY",
   });
+
 
 
   const [chat, editChat] = React.useState("");
@@ -48,7 +54,7 @@ setInterval(iamclock, 5000);
       editMessages(res.data);
     });
     console.log(messages);
-  }, [send,time1]);
+  }, [send,time]);
 
   React.useEffect(async () => {
     console.log(bodyBackgroundColor);
@@ -57,7 +63,7 @@ setInterval(iamclock, 5000);
       editMessages(res.data);
     });
     console.log(messages);
-  }, [send]);
+  }, [send,time]);
 
   //funtion to send the data to the server
 
@@ -185,8 +191,8 @@ setInterval(iamclock, 5000);
 
           </form>
           <div class="emojis">
-            Anonymous :
-           <input class="checkbox" value="false" onClick={(e)=>{
+            Anonymous-
+           <input style={{display:"inline-block"}} class="checkbox" value="false" onClick={(e)=>{
              console.log(e.target.checked);
              
              editAnonymous(e.target.checked)}}  type="checkbox"/>
@@ -196,6 +202,8 @@ setInterval(iamclock, 5000);
     </>
 
   );
+  
+  
 }
 
 

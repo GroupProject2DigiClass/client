@@ -140,6 +140,7 @@ console.log(location.state.data);
             </TableRow>
           </TableHead>
           <TableBody>
+            
             {postdata.map((post) => (
               <StyledTableRow key={post._id}>
                 <StyledTableCell component="th" scope="row"  >

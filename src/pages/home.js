@@ -62,13 +62,11 @@ function Home() {
                 <h6 className="home03">({iclass.subjectCode})</h6>
                 <h6 className="home03">{iclass.subjectTeacher[0]}</h6>
 
-
               </div>
               <div className="home06">
                 <div className="home07">
                   <button className="home08" onClick={() => {moveToClass(iclass);}}  > Open </button>
-                  
-                  </div>
+                </div>
                 
               </div>
 

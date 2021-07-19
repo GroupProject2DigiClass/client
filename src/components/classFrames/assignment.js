@@ -69,6 +69,7 @@ export default function ClassAssignmentTable({ backColor, frontColor }) {
           
           
       
+      
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
