@@ -74,19 +74,21 @@ export default function Class() {
       editClassLectures(res.data);
       editClassTotal({ ...classTotal, lectureTotal: res.data.length });
       console.log(res.data);
+
       editFlag({ ...flag, lecture: true });
     });
-    await getStatus({ classKey: data.subjectCode, rollNo: rollNo }).then(
-      (res) => {
-        editClassStatus(res.data);
-        editClassCompleted({
-          ...classCompleted,
-          lectureCompleted: res.data.length,
-        });
-        console.log(res.data);
-        editFlag({ ...flag, status: true });
-      }
-    );
+    await getStatus({ classKey: data.classKey, rollNo: rollNo }).then((res) => {
+      editClassStatus(res.data);
+      var completed = 0;
+      for (var i = 0; i < res.data.length; i++)
+        if (res.data[i].completed) completed += 1;
+      editClassCompleted({
+        ...classCompleted,
+        lectureCompleted: completed,
+      });
+      console.log(res.data);
+      editFlag({ ...flag, status: true });
+    });
   }, []);
 
   const addClass = () => {
@@ -94,8 +96,8 @@ export default function Class() {
       pathname: "/page/" + classData.classKey,
       state: {
         task: "ADD",
-        unit: classLectures[0].unit,
-        unitN: classLectures[0].unitN,
+        unit: classLectures[0]?classLectures[0].unit:1,
+        unitN: classLectures[0]?classLectures[0].unitN:"temp",
       },
     });
   };

@@ -180,7 +180,9 @@ export default function LecturePage() {
                   }}
                 >
                   <ListItemText>
-                    {unit.name !== undefined ? unit.name : "File"}
+                  <a href={unit} target="_blank">
+                    {unit.name !== undefined ? unit.name : unit+{index}}
+                  </a>
                   </ListItemText>
                   <ListItemSecondaryAction edge="end" aria-label="delete">
                     <IconButton style={{ color: "#007FFF" }} onClick={() => {}}>

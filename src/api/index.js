@@ -1,5 +1,9 @@
 import axios from "axios";
-
+var user = JSON.parse(localStorage.getItem('profile'));
+var gtoken;
+if(user){
+gtoken=user.token;
+}
 const url = "http://localhost5005";
 
 export const createUser = async (newUser) =>
@@ -46,18 +50,31 @@ export const getAllClass = async (data) => {
 };
 
 export const createLecture = async (data) => {
+  data.token=gtoken;
+  console.log(data);
+  
+var data1;
   await axios
     .post("http://localhost:5005/makelecture/", data)
     .then((res) => {
       console.log(res);
+      data1=res.data;
+      console.log(data1);
+      
     })
     .catch((err) => {
       console.log(err);
     })
-    .then(() => {});
+    .then(() => {
+      
+    });
+
+return data1;
+    
 };
 
 export const editLecture = async (data) => {
+  data.token=gtoken;
   await axios
     .post("http://localhost:5005/makelecture/edit", data)
     .then((res) => {
@@ -70,6 +87,9 @@ export const editLecture = async (data) => {
 };
 
 export const getAllLecture = async (data) => {
+
+  data.token=gtoken;
+
   var result;
   await axios
     .post("http://localhost:5005/makelecture/getAll/", data)
@@ -80,6 +100,8 @@ export const getAllLecture = async (data) => {
 };
 
 export const getLecture = async (key) => {
+  key.token=gtoken;
+console.log(key);
   var result;
   await axios
     .post("http://localhost:5005/makelecture/getLecture", key)
@@ -89,7 +111,28 @@ export const getLecture = async (key) => {
   return result;
 };
 
+export const addLecture = async (lectureData) => {
+  var data1;
+  lectureData.token=gtoken;
+  console.log(lectureData);
+    try {
+      let data = await axios.post("http://localhost:5005/makelecture/", lectureData)
+      
+        console.log(data);
+        data1=data;
+      
+    } catch (error) {
+      console.log(error);
+    }
+  
+console.log(data1);
+
+  return data1;
+};
+
+
 export const getStatus = async (data) => {
+  data.token=gtoken;
   var result;
   await axios
     .post("http://localhost:5005/makelecture/getStatus", data)
@@ -100,11 +143,13 @@ export const getStatus = async (data) => {
 };
 
 export const setCompleted = async (assignmentKey, rollNo) => {
+  
   var result;
   await axios
     .post("http://localhost:5005/makelecture/setCompleted", {
       assignmentKey: assignmentKey,
       rollNo: rollNo,
+      token:gtoken,
     })
     .then((res) => {
       result = res;
@@ -113,11 +158,13 @@ export const setCompleted = async (assignmentKey, rollNo) => {
 };
 
 export const setBookmark = async (assignmentKey, rollNo) => {
+ 
   var result;
   await axios
     .post("http://localhost:5005/makelecture/setBookmarked", {
       assignmentKey: assignmentKey,
       rollNo: rollNo,
+      token:gtoken,
     })
     .then((res) => {
       result = res;

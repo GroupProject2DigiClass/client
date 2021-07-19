@@ -1,17 +1,16 @@
 export const refreshTokenSetup = (res) => {
   // Timing to renew access token
-  let refreshTiming = (res.tokenObj.expires_in || 3600 - 5 * 60) * 1000;
-
+  let refreshTiming = ( 310 - 5 * 60) * 10;
+//res.tokenObj.expires_in ||
   const refreshToken = async () => {
-    const newAuthRes = await res.reloadAuthResponse();
-    refreshTiming = (newAuthRes.expires_in || 3600 - 5 * 60) * 1000;
-    console.log("newAuthRes:", newAuthRes);
-    // saveUserToken(newAuthRes.access_token);  <-- save new token
-    localStorage.setItem("authToken", newAuthRes.id_token);
-
+    console.log("refresh tokennnnnnnnnnnnnnnnnnnnnnnn outside");
+  
+    window.location.replace("/login");
     // Setup the other timer after the first one
     setTimeout(refreshToken, refreshTiming);
   };
+  console.log("refresh tokennnnnnnnnnnnnnnnnnnnnnnn outside");
+  
 
   // Setup first refresh timer
   setTimeout(refreshToken, refreshTiming);

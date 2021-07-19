@@ -49,7 +49,7 @@ export default function Practiceindividual() {
       <div style={{ marginBottom: "20px" }}>
         <a href={postdata.driveLink} > Drive Link </a>
       </div>
-      <button type="button" class="btn btn-primary assiindiv2">View Assignment</button>
+     
     </div>
       <hr />
 

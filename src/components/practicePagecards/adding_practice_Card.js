@@ -255,31 +255,7 @@ datam=dataw;
             </div>
           
 
-          <div
-            style={{
-              paddingTop: "10px",
-              justifyContent: "left",
-              display: "flex",
-              paddingTop: "60px",
-            }}
-          >
-            <div
-              style={{
-                fontWeight: "600",
-                verticalAlign: "middle",
-                paddingRight: "10px",
-              }}
-            >
-              Add file
-            </div>
-            <FileBase
-              type="file"
-              multiple={false}
-              onDone={({ base64 }) =>
-                setUserData({ ...userData, images: base64 })
-              }
-            />
-          </div>
+          
           <div style={{ paddingTop: "20px" }}>
             <Button
               size="large"
